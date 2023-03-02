@@ -157,12 +157,12 @@ let sortTime = '-'; // инициализация состояния време�
 
 const comparationColor = (color1, color2) => {
   // TODO: допишите функцию сравнения двух элементов по цвету
-  // сортирую по алфавиту
+  // сортирую по алфавиту!
 return color1.color < color2.color ? true : false;
 };
 const sortAPI = {
   bubbleSort(fruits, comparationColor) {
-    // TODO: допишите функцию сортировки пузырьком
+    // функция сортировки пузырьком
     const n = fruits.length;
     // внешняя итерация по элементам
     for (let i = 0; i < n-1; i++) { 
@@ -179,16 +179,18 @@ const sortAPI = {
     }  
   },
 
-  quickSort(arr, comparation) {
+  quickSort(fruits, comparationColor) {
     // TODO: допишите функцию быстрой сортировки
   },
 
   // выполняет сортировку и производит замер времени
-  startSort(sort, arr, comparation) {
+  startSort(sort, fruits, comparationColor) {
     const start = new Date().getTime();
-    sort(arr, comparation);
+    sort(fruits, comparationColor);
     const end = new Date().getTime();
     sortTime = `${end - start} ms`;
+    console.log(start);
+    console.log(end);
   },
 };
 
@@ -198,14 +200,20 @@ sortTimeLabel.textContent = sortTime;
 
 sortChangeButton.addEventListener('click', () => {
   // TODO: переключать значение sortKind между 'bubbleSort' / 'quickSort'
+  if (sortKind = 'bubbleSort') {sortKindLabel.textContent = 'quickSort'}
+  else {sortKindLabel.textContent = 'bubbleSort'};
+  console.log(sortKind);
 });
 
 sortActionButton.addEventListener('click', () => {
   // TODO: вывести в sortTimeLabel значение 'sorting...'
+  sortTimeLabel.textContent = 'sorting...'
   const sort = sortAPI[sortKind];
   sortAPI.startSort(sort, fruits, comparationColor);
   display();
   // TODO: вывести в sortTimeLabel значение sortTime
+  sortTimeLabel.textContent = sortTime;
+  console.log(sortKind);
 });
 
 /*** ДОБАВИТЬ ФРУКТ ***/
