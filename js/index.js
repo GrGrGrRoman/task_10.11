@@ -110,9 +110,11 @@ const shuffleFruits = () => {
 
   //проверка на то, было ли перемешивание
   for (let i = 0; i < result.length - 1; i++) {
+    //let arrOriginal = [...fruits];
     let arrOriginal = JSON.parse(fruitsJSON);
     if (arrOriginal[i].kind == result[i].kind && arrOriginal[i].color == result[i].color && arrOriginal[i].weight == result[i].weight) {
       arrMixChk = true;
+      console.log(arrOriginal);
     }
   }
 
@@ -140,8 +142,6 @@ const filterFruits = () => {
   if (isNaN(minweight) || isNaN(maxweight)) {
     alert('Введите минимальное и максимальное значение веса!');
   };
-console.log(maxweight);
-console.log(item);
   fruits = item;
 }
 
@@ -155,13 +155,28 @@ filterButton.addEventListener('click', () => {
 let sortKind = 'bubbleSort'; // инициализация состояния вида сортировки
 let sortTime = '-'; // инициализация состояния времени сортировки
 
-const comparationColor = (a, b) => {
+const comparationColor = (color1, color2) => {
   // TODO: допишите функцию сравнения двух элементов по цвету
+  // сортирую по алфавиту
+return color1.color < color2.color ? true : false;
 };
-
 const sortAPI = {
-  bubbleSort(arr, comparation) {
+  bubbleSort(fruits, comparationColor) {
     // TODO: допишите функцию сортировки пузырьком
+    const n = fruits.length;
+    // внешняя итерация по элементам
+    for (let i = 0; i < n-1; i++) { 
+        // внутренняя итерация для перестановки элемента в конец массива
+        for (let j = 0; j < n-1-i; j++) { 
+            // сравниваем элементы
+            if (comparationColor(fruits[j], fruits[j+1])) { 
+                // делаем обмен элементов
+                let temp = fruits[j+1]; 
+                fruits[j+1] = fruits[j]; 
+                fruits[j] = temp; 
+            }
+        }
+    }  
   },
 
   quickSort(arr, comparation) {
