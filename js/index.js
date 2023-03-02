@@ -156,21 +156,17 @@ let sortKind = 'bubbleSort'; // инициализация состояния в
 let sortTime = '-'; // инициализация состояния времени сортировки
 
 const comparationColor = (color1, color2) => {
-  // TODO: допишите функцию сравнения двух элементов по цвету
-  // сортирую по алфавиту!
+  // функция сравнения двух элементов по цвету
+  // сортируем по алфавиту по убыванию
 return color1.color < color2.color ? true : false;
 };
 const sortAPI = {
   bubbleSort(fruits, comparationColor) {
     // функция сортировки пузырьком
     const n = fruits.length;
-    // внешняя итерация по элементам
     for (let i = 0; i < n-1; i++) { 
-        // внутренняя итерация для перестановки элемента в конец массива
         for (let j = 0; j < n-1-i; j++) { 
-            // сравниваем элементы
             if (comparationColor(fruits[j], fruits[j+1])) { 
-                // делаем обмен элементов
                 let temp = fruits[j+1]; 
                 fruits[j+1] = fruits[j]; 
                 fruits[j] = temp; 
@@ -198,11 +194,19 @@ const sortAPI = {
 sortKindLabel.textContent = sortKind;
 sortTimeLabel.textContent = sortTime;
 
+const sortNameB = 'bubbleSort';
+const sortnameQ = 'quickSort';
+
 sortChangeButton.addEventListener('click', () => {
-  // TODO: переключать значение sortKind между 'bubbleSort' / 'quickSort'
-  if (sortKind = 'bubbleSort') {sortKindLabel.textContent = 'quickSort'}
-  else {sortKindLabel.textContent = 'bubbleSort'};
-  console.log(sortKind);
+  // переключает значение sortKind между 'bubbleSort' / 'quickSort'
+  if (sortKind == 'quickSort') {
+    sortKindLabel.textContent = sortKind;
+    return sortKind = sortNameB;
+  }
+  if (sortKind == 'bubbleSort') {
+    sortKindLabel.textContent = sortKind;
+    return sortKind = sortnameQ;
+  }
 });
 
 sortActionButton.addEventListener('click', () => {
