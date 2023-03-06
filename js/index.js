@@ -114,7 +114,7 @@ const shuffleFruits = () => {
     let arrOriginal = JSON.parse(fruitsJSON);
     if (arrOriginal[i].kind == result[i].kind && arrOriginal[i].color == result[i].color && arrOriginal[i].weight == result[i].weight) {
       arrMixChk = true;
-      console.log(arrOriginal);
+      //console.log(arrOriginal);
     }
   }
 
@@ -175,49 +175,70 @@ const sortAPI = {
     }  
   },
 
-  quickSort(fruits, comparationColor) {
+  quickSort(fruits) {
     // TODO: допишите функцию быстрой сортировки
-  },
+    if (fruits.length <= 1) {
+      return fruits;
+  }
 
-  // выполняет сортировку и производит замер времени
-  startSort(sort, fruits, comparationColor) {
-    const start = new Date().getTime();
-    sort(fruits, comparationColor);
-    const end = new Date().getTime();
-    sortTime = `${end - start} ms`;
-    console.log(start);
-    console.log(end);
+  const pivot = fruits[fruits.length - 1];
+  const leftList = [];
+  const rightList = [];
+
+  for (let i = 0; i < fruits.length - 1; i++) {
+      if (fruits[i.color] < pivot) {
+          leftList.push(fruits[i]);
+      }
+      else {
+          rightList.push(fruits[i])
+      }
+  }
+
+  return [...this.quickSort(leftList), pivot, ...this.quickSort(rightList)];
   },
+  // выполняет сортировку и производит замер времени
+  //startSort(sort, fruits, comparationColor) {
+    //const start = new Date().getTime();
+    //sort(fruits, comparationColor);
+    //const end = new Date().getTime();
+    //sortTime = `${end - start} ms`;
+    //console.log(start);
+    //console.log(end);
+  //},
 };
+
 
 // инициализация полей
 sortKindLabel.textContent = sortKind;
 sortTimeLabel.textContent = sortTime;
 
-const sortNameB = 'bubbleSort';
-const sortnameQ = 'quickSort';
-
 sortChangeButton.addEventListener('click', () => {
   // переключает значение sortKind между 'bubbleSort' / 'quickSort'
-  if (sortKind == 'quickSort') {
-    sortKindLabel.textContent = sortKind;
-    return sortKind = sortNameB;
-  }
-  if (sortKind == 'bubbleSort') {
-    sortKindLabel.textContent = sortKind;
-    return sortKind = sortnameQ;
-  }
+  if (sortKind === 'bubbleSort') {
+      sortKind = 'quickSort';
+      } else {
+      sortKind = 'bubbleSort';
+      }
+  sortKindLabel.textContent = sortKind;
 });
 
 sortActionButton.addEventListener('click', () => {
-  // TODO: вывести в sortTimeLabel значение 'sorting...'
-  sortTimeLabel.textContent = 'sorting...'
-  const sort = sortAPI[sortKind];
-  sortAPI.startSort(sort, fruits, comparationColor);
+  sortTimeLabel.textContent = 'sorting...';
+  const start = new Date().getTime();
+  if (sortKind === 'bubbleSort') {
+    sortAPI.bubbleSort(fruits, comparationColor);
+  } else {    
+    fruits = sortAPI.quickSort(fruits, comparationColor);
+  }
+  const end = new Date().getTime();
+  sortTime = `${end - start} мс`
+
+
+  //const sort = sortAPI[sortKind];
+  //sortAPI.startSort(sort, fruits, comparationColor);
   display();
-  // TODO: вывести в sortTimeLabel значение sortTime
+  // вывод в sortTimeLabel значение sortTime
   sortTimeLabel.textContent = sortTime;
-  console.log(sortKind);
 });
 
 /*** ДОБАВИТЬ ФРУКТ ***/
