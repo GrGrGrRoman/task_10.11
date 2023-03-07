@@ -260,8 +260,5 @@ addActionButton.addEventListener('click', () => {
   if (newFruit.kind == '' || newFruit.color == '' || newFruit.weight == '') {
     alert('Введите название, цвет и вес!');
   } else {fruits.push(newFruit)};  // добавление нового объекта в конец массива
-
-  console.log(fruits);
-
   display();
 });
