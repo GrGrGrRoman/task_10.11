@@ -195,7 +195,7 @@ const sortAPI = {
   },
 
   quickSort(fruits) {
-    //  функциz быстрой сортировки
+    //  функция быстрой сортировки
     if (fruits.length <= 1) {
       return fruits;
   }
@@ -209,7 +209,7 @@ const sortAPI = {
           leftList.push(fruits[i]);
       }
       else {
-          rightList.push(fruits[i])
+          rightList.push(fruits[i]);
       }
   }
 
@@ -250,13 +250,16 @@ sortActionButton.addEventListener('click', () => {
 
 /*** ДОБАВИТЬ ФРУКТ ***/
 
-
 addActionButton.addEventListener('click', () => {
+  // создание нового объекта
   let newFruit = {};
+  // получаем значения из input-ов
   newFruit.kind = kindInput.value;
   newFruit.color = colorInput.value;
   newFruit.weight = weightInput.value;
-  fruits.push(newFruit);
+  if (newFruit.kind == '' || newFruit.color == '' || newFruit.weight == '') {
+    alert('Введите название, цвет и вес!');
+  } else {fruits.push(newFruit)};  // добавление нового объекта в конец массива
 
   console.log(fruits);
 
