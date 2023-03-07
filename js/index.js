@@ -39,7 +39,7 @@ let fruits = JSON.parse(fruitsJSON);
 
 // отрисовка карточек
 const display = () => {
-  // TODO: очищаем fruitsList от вложенных элементов,
+  // очищаем fruitsList от вложенных элементов,
   // чтобы заполнить актуальными данными из fruits
   fruitsList.innerHTML = null;
   for (let i = 0; i < fruits.length; i++) {
@@ -63,6 +63,7 @@ const display = () => {
     divInfo.appendChild(divColor);
     divInfo.appendChild(divWeight);
     li.appendChild(divInfo);
+    
     // соответствие цветов и фруктов
     if (fruits[i].kind == 'Мангустин') {
     li.classList.add('fruit__item', `${colorClass.violet}`);
